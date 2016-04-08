@@ -1,6 +1,14 @@
 # IoT Couchbase Beacon Project
 
-An example project that will scan for iBeacons from a Yocto Linux (or similar) IoT device.  iBeacons will be piped from the [Radius Networks](http://developer.radiusnetworks.com/ibeacon/idk/ibeacon_scan) scan script into a Java application that will save the transaction information to Couchbase Server via Couchbase Lite for Java and Couchbase Sync Gateway.
+This IoT project will scan for portable bluetooth iBeacons and save their information to a Couchbase NoSQL database.
+
+Possible use cases (not limited to):
+
+* Maybe airliners attach iBeacons to luggage that has been checked-in for transport and IoT scanners are dispersed at airports.  Luggage location could be tracked and less will become lost.
+
+* Maybe amusement parks like Disney keep IoT scanners running at various locations around their parks.  iBeacon bracelets or fabs could be given to small children so if they become lost in the park, they could easily be found.
+
+To be more specific about the technical details, this project will run on an IoT device such as an Intel IoT Gateway and continuously scan for bluetooth signals that match the iBeacon specification.  Scanning uses the `hcitool` and `hcidump` tools found on Yocto and other Linux distribution flavors.  To make bluetooth parsing simple, this project will use the **iBeacon Scan** script by [Radius Networks](http://developer.radiusnetworks.com/ibeacon/idk/ibeacon_scan) to parse the `hcidump` data.  Once parsed, the data will be piped into the Java application that will save the data into Couchbase Server via Couchbase Lite for Java and the Couchbase Sync Gateway.
 
 Each iBeacon transaction will be stored as an embedded document.  This means that one document will exist per unique iBeacon.  All status information such as timestamps and power will be stored as an array within the same document.  For example:
 
@@ -12,8 +20,13 @@ Each iBeacon transaction will be stored as an embedded document.  This means tha
     "beaconStatus": [
         {
             "power": -45,
-            "gatewayDevice": "macbook",
+            "gatewayDevice": "kitchen",
             "createdAt": 1460150563819
+        },
+        {
+            "power": -59,
+            "gatewayDevice": "bathroom",
+            "createdAt": 1460150583234
         }
     ]
 }
@@ -28,6 +41,7 @@ There are a few requirements to use this application.
 * Couchbase Sync Gateway
 * Maven
 * JDK 1.7 (version dependent on IoT JRE)
+* An IoT device with BLE (Intel IoT Gateway and Intel Edison recommended)
 
 ## Configuration
 
@@ -54,3 +68,7 @@ The script will run until manually stopped.
 ## Resources
 
 Couchbase - http://developer.couchbase.com
+
+Intel IoT Gateway - https://www-ssl.intel.com/content/www/us/en/service-gateway/service-gateway-overview.html
+
+Gimbal - http://www.gimbal.com/

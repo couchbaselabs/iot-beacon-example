@@ -6,7 +6,7 @@ Possible use cases (not limited to):
 
 * Maybe airliners attach iBeacons to luggage that has been checked-in for transport and IoT scanners are dispersed at airports.  Luggage location could be tracked and less will become lost.
 
-* Maybe amusement parks like Disney keep IoT scanners running at various locations around their parks.  iBeacon bracelets or fabs could be given to small children so if they become lost in the park, they could easily be found.
+* Maybe amusement parks keep IoT scanners running at various locations around their parks.  iBeacon bracelets or fabs could be given to small children so if they become lost in the park, they could easily be found.
 
 To be more specific about the technical details, this project will run on an IoT device such as an Intel IoT Gateway and continuously scan for bluetooth signals that match the iBeacon specification.  Scanning uses the `hcitool` and `hcidump` tools found on Yocto and other Linux distribution flavors.  To make bluetooth parsing simple, this project will use the **iBeacon Scan** script by [Radius Networks](http://developer.radiusnetworks.com/ibeacon/idk/ibeacon_scan) to parse the `hcidump` data.  Once parsed, the data will be piped into the Java application that will save the data into Couchbase Server via Couchbase Lite for Java and the Couchbase Sync Gateway.
 

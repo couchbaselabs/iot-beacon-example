@@ -65,6 +65,8 @@ Scanning for iBeacons and saving them to Couchbase can be started by executing t
 
 The script will run until manually stopped.
 
+![iBeacon Couchbase Example](/iot-couchbase-ibeacon-example.gif)
+
 ## Troubleshooting
 
 If you experience the following error when trying to run via your IoT device:

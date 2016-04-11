@@ -65,6 +65,30 @@ Scanning for iBeacons and saving them to Couchbase can be started by executing t
 
 The script will run until manually stopped.
 
+## Troubleshooting
+
+If you experience the following error when trying to run via your IoT device:
+
+```
+Library not found: /native/linux/i386/libsqlite3.so
+```
+
+You will have to do some hacking when it comes to your JAR file.  By default, only **amd64**, **x86**, and **x86_64** directories exist for the SQLite libraries.  We must create an **i386** directory.
+
+Extract the compiled JAR file using the following command:
+
+```sh
+jar xvf <filename>.jar
+```
+
+Navigate into **native/linux** directory of the extracted jar and rename **x86** to **i386**.  Recompile the JAR by executing the following:
+
+```sh
+jar cvfm iot-couchbase-project.jar META-INF/MANIFEST.MF .
+```
+
+The application should work now.
+
 ## Resources
 
 Couchbase - http://developer.couchbase.com

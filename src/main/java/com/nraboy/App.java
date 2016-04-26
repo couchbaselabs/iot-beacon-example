@@ -23,7 +23,7 @@ public class App {
         try {
             manager = new Manager(new JavaContext("data"), Manager.DEFAULT_OPTIONS);
             database = manager.getDatabase("iot-project");
-            URL url = new URL("http://192.168.1.174:4984/beacons-iot/");
+            URL url = new URL("http://localhost:4984/test-database/");
             final Replication push = database.createPushReplication(url);
             Replication pull = database.createPullReplication(url);
             pull.setContinuous(false);

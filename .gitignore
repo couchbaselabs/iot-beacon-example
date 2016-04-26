@@ -2,6 +2,9 @@ target
 data
 .idea
 
+dashboard/node_modules
+dashboard/public/bower_components
+
 .DS_Store*
 Thumbs.db*
 *.iml

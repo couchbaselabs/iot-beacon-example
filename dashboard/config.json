@@ -1,0 +1,7 @@
+{
+    "couchbase": {
+        "server": "localhost:8091",
+        "bucket": "test-database"
+
+    }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/Chart.js/Chart.js"></script>
+        <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+        <script src="js/app.js"></script>
+    </head>
+    <body ng-app="iotDashboard" ng-controller="MainController">
+        <div class="container-fluid" style="padding-top: 20px; padding-bottom: 20px">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 style="margin: 0; padding-bottom: 15px">Stats for Today / {{ today }}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" ng-repeat="(key, value) in map">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{key}}</div>
+                        <div class="panel-body">
+                            <canvas id="line" class="chart chart-line" chart-data="value.data" chart-labels="labels" chart-series="value.series" chart-legend="true"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    </body>
+</html>

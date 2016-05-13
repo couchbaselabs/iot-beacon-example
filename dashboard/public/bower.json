@@ -1,0 +1,28 @@
+{
+  "name": "iot_dashboard",
+  "homepage": "https://github.com/couchbaselabs/iot-beacon-example",
+  "authors": [
+    "Nic Raboy <nic@couchbase.com>"
+  ],
+  "description": "dashboard for the iot project",
+  "main": "index.html",
+  "keywords": [
+    "iot",
+    "couchbase",
+    "ibeacon"
+  ],
+  "license": "Apache 2.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "highcharts-ng": "^0.0.11",
+    "highcharts": "^4.2.5"
+  }
+}

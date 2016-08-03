@@ -1,7 +1,7 @@
 {
     "log":["CRUD+", "REST+", "Changes+", "Attach+"],
     "databases": {
-        "test-database": {
+        "default": {
             "server":"http://localhost:8091",
             "sync":`
                 function (doc) {
@@ -15,5 +15,11 @@
                 }
             }
         }
+    },
+    "CORS": {
+        "Origin": ["http://localhost:3000"],
+        "LoginOrigin": ["http://localhost:3000"],
+        "Headers": ["Content-Type"],
+        "MaxAge": 17280000
     }
 }

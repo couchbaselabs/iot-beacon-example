@@ -6,7 +6,7 @@ var app = express();
 
 module.exports.bucket = (new couchbase.Cluster(config.couchbase.server)).openBucket(config.couchbase.bucket);
 
-app.use(express.static(path.join(__dirname, "public/src")));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");

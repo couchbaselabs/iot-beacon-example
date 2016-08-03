@@ -10,25 +10,14 @@ Possible use cases (not limited to):
 
 To be more specific about the technical details, this project will run on an IoT device such as an Intel IoT Gateway and continuously scan for bluetooth signals that match the iBeacon specification.  Scanning uses the `hcitool` and `hcidump` tools found on Yocto and other Linux distribution flavors.  To make bluetooth parsing simple, this project will use the **iBeacon Scan** script by [Radius Networks](http://developer.radiusnetworks.com/ibeacon/idk/ibeacon_scan) to parse the `hcidump` data.  Once parsed, the data will be piped into the Java application that will save the data into Couchbase Server via Couchbase Lite for Java and the Couchbase Sync Gateway.
 
-Each iBeacon transaction will be stored as an embedded document.  This means that one document will exist per unique iBeacon.  All status information such as timestamps and power will be stored as an array within the same document.  For example:
+Each iBeacon transaction will be stored as a single document.  This means that one document will exist per every time any iBeacon has been discovered.  All status information such as timestamps and power will be stored within the same document.  For example:
 
 ```json
 {
-    "uuid": "74278BDA-B644-4520-8F0C-720EAF059935",
-    "major": 1,
-    "minor": 0,
-    "beaconStatus": [
-        {
-            "power": -45,
-            "gatewayDevice": "kitchen",
-            "createdAt": 1460150563819
-        },
-        {
-            "power": -59,
-            "gatewayDevice": "bathroom",
-            "createdAt": 1460150583234
-        }
-    ]
+    "beacon": "74278BDA-B644-4520-8F0C-720EAF059935::1::0",
+    "power": -45,
+    "gateway": "raspberrypi::127.0.0.1",
+    "timestamp": 1460150563819
 }
 ```
 

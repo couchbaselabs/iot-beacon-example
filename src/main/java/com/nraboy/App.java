@@ -7,7 +7,6 @@ package com.nraboy;
 
 import com.couchbase.lite.*;
 import com.couchbase.lite.replicator.Replication;
-
 import java.net.URL;
 
 public class App {
@@ -23,20 +22,9 @@ public class App {
         try {
             manager = new Manager(new JavaContext("data"), Manager.DEFAULT_OPTIONS);
             database = manager.getDatabase("iot-project");
-            URL url = new URL("http://localhost:4984/test-database/");
+            URL url = new URL("http://localhost:4984/default/");
             final Replication push = database.createPushReplication(url);
-            Replication pull = database.createPullReplication(url);
-            pull.setContinuous(false);
             push.setContinuous(false);
-            pull.addChangeListener(new Replication.ChangeListener() {
-                @Override
-                public void changed(Replication.ChangeEvent event) {
-                    if(event.getSource().getStatus() == Replication.ReplicationStatus.REPLICATION_STOPPED) {
-                        beacon.save(database);
-                        push.start();
-                    }
-                }
-            });
             push.addChangeListener(new Replication.ChangeListener() {
                 @Override
                 public void changed(Replication.ChangeEvent event) {
@@ -45,7 +33,8 @@ public class App {
                     }
                 }
             });
-            pull.start();
+            beacon.save(database);
+            push.start();
         } catch (Exception e) {
             e.printStackTrace();
         }

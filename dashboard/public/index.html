@@ -12,19 +12,132 @@
     </head>
     <body ng-app="iotDashboard">
         <div ng-controller="ExampleController">
-            <div class="container-fluid" style="padding-top: 20px; padding-bottom: 20px">
+            <div class="container" style="padding-top: 20px; padding-bottom: 20px">
                 <div class="row">
-                    <div class="col-md-6" ng-repeat="chart in charts">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">{{chart.name}}</div>
-                            <div class="panel-body">
-                                <highchart id="chart-{{chart.name}}" config="chart" class="span10"></highchart>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>Registered Gateways</strong>
+                                        <a href="#" class="pull-right" data-toggle="modal" data-target="#gatewayModal">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                    <ul class="list-group">
+                                        <li class="list-group-item" ng-repeat="gateway in gateways">{{gateway.name}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>Registered iBeacons</strong>
+                                        <a href="#" class="pull-right" data-toggle="modal" data-target="#beaconModal">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                    <ul class="list-group">
+                                        <li class="list-group-item" ng-repeat="beacon in beacons">{{beacon.name}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-12" ng-repeat="chart in charts">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">{{chart.name}}</div>
+                                    <div class="panel-body">
+                                        <highchart id="chart-{{chart.name}}" config="chart" class="span10"></highchart>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="gatewayModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Register Gateway</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="name" placeholder="Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Hostname</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="hostname" placeholder="Hostname">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">IP</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="ipaddress" placeholder="IP Address">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveGateway(name, hostname, ipaddress)">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="beaconModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Register New iBeacon</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="name" placeholder="Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">UUID</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="uuid" placeholder="UUID">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Major</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="major" placeholder="Major">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Minor</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="minor" placeholder="Minor">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveBeacon(name, uuid, major, minor)">Register</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     </body>
 </html>

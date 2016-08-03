@@ -20,6 +20,24 @@ var appRouter = function(app) {
         });
     });
 
+    app.get("/activity", function(req, res) {
+        Model.getActivity(function(error, result) {
+            if(error) {
+                return res.status(400).send({"status": "error"});
+            }
+            res.send(result);
+        });
+    });
+
+    app.get("/beacons", function(req, res) {
+        Model.getAllBeacons(function(error, result) {
+            if(error) {
+                return res.status(400).send({"status": "error"});
+            }
+            res.send(result);
+        });
+    });
+
     app.get("/test", function(req, res) {
         Model.getAllTest(function(error, result) {
             if(error) {

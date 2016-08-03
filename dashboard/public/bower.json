@@ -23,6 +23,7 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "highcharts-ng": "^0.0.11",
-    "highcharts": "^4.2.5"
+    "highcharts": "^4.2.5",
+    "angular": "^1.5.8"
   }
 }

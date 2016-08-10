@@ -72,17 +72,16 @@ dashboard.controller("ExampleController", function($scope, $http) {
         }
     }
 
-    $scope.saveGateway = function(name, hostname, ipaddress) {
-        if(name != "" && hostname != "" && ipaddress != "") {
-            var documentId = hostname + "::" + ipaddress;
+    $scope.saveGateway = function(name, hostname) {
+        if(name != "" && hostname != "") {
+            var documentId = hostname;
             $http({
                 method: "PUT",
                 url: "http://localhost:4984/default/" + documentId,
                 data: {
                     type: "gateway",
                     name: name,
-                    hostname: hostname,
-                    ipaddress: ipaddress
+                    hostname: hostname
                 },
                 headers: {
                     "Content-Type": "application/json"

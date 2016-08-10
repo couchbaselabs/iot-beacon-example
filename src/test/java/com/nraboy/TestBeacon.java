@@ -13,6 +13,8 @@ import com.couchbase.lite.JavaContext;
 import com.couchbase.lite.Manager;
 import org.junit.Test;
 
+import java.net.InetAddress;
+
 public class TestBeacon {
 
     private Manager manager;

@@ -6,6 +6,7 @@ var app = express();
 
 module.exports.bucket = (new couchbase.Cluster(config.couchbase.server)).openBucket(config.couchbase.bucket);
 
+app.use("/bower_components",express.static(path.join(__dirname, "public/bower_components")));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(function(req, res, next) {

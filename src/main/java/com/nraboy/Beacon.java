@@ -7,7 +7,9 @@ package com.nraboy;
 
 import com.couchbase.lite.*;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class Beacon {
 
@@ -26,10 +28,9 @@ public class Beacon {
         this.beacon = properties[0] + "::" + Integer.parseInt(properties[1]) + "::" + Integer.parseInt(properties[2]);
         this.power = Integer.parseInt(properties[3]);
         try {
-            String[] inet = InetAddress.getLocalHost().toString().split("/");
-            this.gateway = inet[0] + "::" + inet[1];
+            this.gateway = InetAddress.getLocalHost().getHostName();
         } catch (Exception e) {
-            this.gateway = "unknown::0000";
+            this.gateway = "unknown";
         }
         this.timestamp = System.currentTimeMillis();
     }
@@ -44,6 +45,10 @@ public class Beacon {
 
     public int getMinor() {
         return this.minor;
+    }
+
+    public String getGateway() {
+        return this.gateway;
     }
 
     public String save(Database database) {
@@ -65,6 +70,7 @@ public class Beacon {
 
         return docId;
     }
+
 
     public void print() {
         System.out.println(this.beacon + "\t\t" + this.major + "\t\t" + this.minor + "\t\t" + this.power + "\t\t" + this.gateway + "\t\t" + this.timestamp);

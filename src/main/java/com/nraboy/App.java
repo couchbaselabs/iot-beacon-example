@@ -22,7 +22,7 @@ public class App {
         try {
             manager = new Manager(new JavaContext("data"), Manager.DEFAULT_OPTIONS);
             database = manager.getDatabase("iot-project");
-            URL url = new URL("http://localhost:4984/default/");
+            URL url = new URL("http://10.0.1.62:4984/default/");
             final Replication push = database.createPushReplication(url);
             push.setContinuous(false);
             push.addChangeListener(new Replication.ChangeListener() {

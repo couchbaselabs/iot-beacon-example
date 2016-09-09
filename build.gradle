@@ -9,15 +9,11 @@ description = """IoT Couchbase Project"""
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-task fatJar(type: Jar) {
-    manifest {
-        attributes 'Implementation-Title': 'Gradle Jar File Example',
-        'Implementation-Version': version,
-        'Main-Class': 'com.nraboy.App'
-    }
-    baseName = project.name + '-all'
+jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
+    manifest {
+        attributes("Main-Class": "com.nraboy.App")
+    }
 }
 
 repositories {

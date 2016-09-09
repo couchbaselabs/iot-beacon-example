@@ -2,6 +2,7 @@ target
 data
 build
 .idea
+.gradle
 
 dashboard/node_modules
 dashboard/public/bower_components

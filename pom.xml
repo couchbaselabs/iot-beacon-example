@@ -7,21 +7,9 @@
     <version>1.0</version>
     <dependencies>
         <dependency>
-            <groupId>io.reactivex</groupId>
-            <artifactId>rxjava</artifactId>
-            <version>1.1.2</version>
-        </dependency>
-        <dependency>
             <groupId>com.couchbase.lite</groupId>
             <artifactId>couchbase-lite-java</artifactId>
             <version>1.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>couchbase-lite-java</groupId>
-            <artifactId>couchbase-lite-java-sqlite-custom</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/couchbase-lite-java-sqlite-custom.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.couchbase.lite</groupId>
@@ -45,6 +33,26 @@
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>couchbase-lite-java</groupId>
+                            <artifactId>couchbase-lite-java-sqlite-custom</artifactId>
+                            <version>1.0</version>
+                            <packaging>jar</packaging>
+                            <file>${project.basedir}/libs/couchbase-lite-java-sqlite-custom.jar</file>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
